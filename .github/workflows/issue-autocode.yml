@@ -31,7 +31,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           openaikey: ${{ secrets.OPENAI_KEY }}
         # Grant execute permission to interaction_script.sh then runinteraction_script.sh script
-        run: chmod +x interaction_script.sh && ./interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
+        # go to the scripts folder at the root of the repository and run the interaction_script.sh script
+        run: chmod +x scripts/interaction_script.sh && scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
 
       - name: Upload Artifact
         # action to upload an artifact, the content of autocoder-bot/ directory
