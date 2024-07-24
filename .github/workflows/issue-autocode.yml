@@ -33,13 +33,18 @@ jobs:
         # Grant execute permission to interaction_script.sh then runinteraction_script.sh script
         # go to the scripts folder at the root of the repository and run the interaction_script.sh script
         run: chmod +x scripts/interaction_script.sh && scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
-
       - name: Upload Artifact
-        # action to upload an artifact, the content of autocoder-bot/ directory
         uses: actions/upload-artifact@v2
         with:
-            name: autocoder-bot-artifact
+            name: autocoder-artifact
             path: autocoder-bot/
-      - name: Display Generated Code using the ls command
-        # download the artifact and display the content of the autocoder-bot/ directory
+
+        # # download the artifact and display the content of the autocoder-bot/ directory
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: autocoder-artifact
+          path: autocoder-bot/
+
+      - name: List Files
         run: ls autocoder-bot/
