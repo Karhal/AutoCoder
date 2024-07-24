@@ -76,6 +76,7 @@ for key in $(echo "$FILES_JSON" | jq -r 'keys[]'); do
     CODE_SNIPPET=$(echo "$FILES_JSON" | jq -r --arg key "$key" '.[$key]')
     CODE_SNIPPET=$(echo "$CODE_SNIPPET" | sed 's/\r$//') # Normalize line endings
     save_to_file "$FILENAME" "$CODE_SNIPPET"
+    echo $CODE_SNIPPET
 done
 
 echo "All files have been processed successfully."
