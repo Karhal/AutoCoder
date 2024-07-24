@@ -38,7 +38,7 @@ save_to_file() {
 # Fetch and process issue details
 RESPONSE=$(fetch_issue_details)
 ISSUE_BODY=$(echo "$RESPONSE" | jq -r .body)
-
+echo $ISSUE_BODY
 if [[ -z "$ISSUE_BODY" ]]; then
     echo 'Issue body is empty or not found in the response.'
     exit 1
