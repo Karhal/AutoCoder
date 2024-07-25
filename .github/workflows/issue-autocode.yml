@@ -20,9 +20,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Generate Code with ChatGPT
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set permissions for interaction_script.sh
+        run: chmod +x scripts/interaction_script.sh
+      - name: Run interaction_script.sh
         id: generate_code
         env:
         #Retrieve the issue number, repository, and authentication keys from the environment
@@ -32,19 +34,19 @@ jobs:
           openaikey: ${{ secrets.OPENAI_KEY }}
         # Grant execute permission to interaction_script.sh then runinteraction_script.sh script
         # go to the scripts folder at the root of the repository and run the interaction_script.sh script
-        run: chmod +x scripts/interaction_script.sh && scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
-      - name: Upload Artifact
+        run: scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
+      - name: Upload genrated files as artifacts
         uses: actions/upload-artifact@v2
         with:
             name: autocoder-artifact
             path: autocoder-bot/
 
         # # download the artifact and display the content of the autocoder-bot/ directory
-      - name: Download Artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           name: autocoder-artifact
           path: autocoder-bot/
 
-      - name: List Files
+      - name: List files in the artifact
         run: tree autocoder-bot/
