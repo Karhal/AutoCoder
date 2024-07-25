@@ -22,9 +22,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Set permissions for interaction_script.sh
-        run: chmod +x scripts/interaction_script.sh
-      - name: Run interaction_script.sh
+      - name: Set permissions for script.sh
+        run: chmod +x scripts/script.sh
+      - name: Run script.sh
         id: generate_code
         env:
         #Retrieve the issue number, repository, and authentication keys from the environment
@@ -34,7 +34,7 @@ jobs:
           openaikey: ${{ secrets.OPENAI_KEY }}
         # Grant execute permission to interaction_script.sh then runinteraction_script.sh script
         # go to the scripts folder at the root of the repository and run the interaction_script.sh script
-        run: scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
+        run: scripts/script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
       - name: Upload genrated files as artifacts
         uses: actions/upload-artifact@v2
         with:
