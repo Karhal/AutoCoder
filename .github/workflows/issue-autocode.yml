@@ -13,15 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: make the script executable
-        run: chmod +x scripts/script.sh
+        run: chmod +x ./scripts/script.sh
       - name: Generate Code with ChatGPT
         id: generate_code
         env:
-          issue: ${{ github.event.issue.number }}
-          repo: ${{ github.repository }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          openaikey: ${{ secrets.OPENAI_API_KEY }}
-        run: scripts/script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: ./scripts/script.sh $GITHUB_TOKEN $REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
