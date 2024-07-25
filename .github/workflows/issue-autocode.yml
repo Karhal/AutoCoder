@@ -35,7 +35,7 @@ jobs:
         # Grant execute permission to interaction_script.sh then runinteraction_script.sh script
         # go to the scripts folder at the root of the repository and run the interaction_script.sh script
         run: scripts/script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
-      - name: Upload genrated files as artifacts
+      - name: Upload generated files as artifacts
         uses: actions/upload-artifact@v2
         with:
             name: autocoder-artifact
