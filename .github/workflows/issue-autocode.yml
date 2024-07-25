@@ -20,7 +20,7 @@ jobs:
           repo: ${{ github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
           openaikey: ${{ secrets.OPENAI_API_KEY }}
-        run: chmod +x scripts/interaction_script.sh && scripts/interaction_script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
+        run: chmod +x scripts/script.sh && scripts/script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
