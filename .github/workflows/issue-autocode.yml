@@ -20,7 +20,7 @@ jobs:
           issue: ${{ github.event.issue.number }}
           repo: ${{ github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          openaikey: ${{ secrets.OPENAI_KEY }}
+          openaikey: ${{ secrets.OPENAI_API_KEY }}
         run: scripts/script.sh ${{ env.token }} ${{ env.repo }} ${{ env.issue }} ${{ env.openaikey }}
 
       - name: Upload Artifact
