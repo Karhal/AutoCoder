@@ -36,4 +36,4 @@ jobs:
           path: autocoder-artifact/
 
       - name: List Files
-        run: ls -R autocoder-artifact/
+        run: ls -R ./autocoder-artifact
