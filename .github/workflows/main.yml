@@ -5,6 +5,10 @@ on:
     types: [opened, reopened, labeled]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     if: contains(github.event.issue.labels.*.name, 'autocoder-bot')
