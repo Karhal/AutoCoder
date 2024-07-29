@@ -63,12 +63,4 @@ jobs:
           git push -u origin autocoder-changes
 
       - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create --title "Add generated code from ChatGPT" --body "This PR adds the generated code from ChatGPT." --head autocoder-changes --base main
-      - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create --title "Add generated code from ChatGPT" --body "This PR adds the generated code from ChatGPT." --head $BRANCH_NAME --base main --label "autocoder-bot"
+        uses: peter-evans/create-or-update-project-card@v2
