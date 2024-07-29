@@ -12,8 +12,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: make the script executable
         run: chmod +x ./scripts/script.sh
+
       - name: Generate Code with ChatGPT
         id: generate_code
         env:
@@ -37,3 +39,32 @@ jobs:
 
       - name: List Files
         run: ls -R ./autocoder-artifact
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'autocoder-bot'
+          git config --global user.email 'actions@github.com'
+
+      - name: Commit Changes
+        run: |
+          BRANCH_NAME="autocoder-branch-${{ github.event.issue.number }}"
+          git checkout -b $BRANCH_NAME
+          git add ./autocoder-artifact
+          git commit -m "Add generated code from ChatGPT"
+
+      - name: Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push -u origin autocoder-changes
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --title "Add generated code from ChatGPT" --body "This PR adds the generated code from ChatGPT." --head autocoder-changes --base main
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --title "Add generated code from ChatGPT" --body "This PR adds the generated code from ChatGPT." --head $BRANCH_NAME --base main --label "autocoder-bot"
