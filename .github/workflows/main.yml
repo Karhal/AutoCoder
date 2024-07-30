@@ -54,7 +54,7 @@ jobs:
           BRANCH_NAME="autocoder-branch-${{ github.event.issue.number }}"
           git checkout -b $BRANCH_NAME
           git add ./autocoder-artifact
-          git commit -m "Add generated code from ChatGPT"
+          git commit -m "Add generated code from ChatGPT"  --author="autocoder-bot <actions@github.com>"
 
       - name: Push Changes
         env:
