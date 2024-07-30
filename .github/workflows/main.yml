@@ -44,13 +44,10 @@ jobs:
       - name: List Files
         run: ls -R ./autocoder-artifact
 
-      - name: Configure Git
+      - name: Commit Changes
         run: |
           git config --global user.name 'autocoder-bot'
           git config --global user.email 'actions@github.com'
-
-      - name: Commit Changes
-        run: |
           BRANCH_NAME="autocoder-branch-${{ github.event.issue.number }}"
           git checkout -b $BRANCH_NAME
           git add ./autocoder-artifact
