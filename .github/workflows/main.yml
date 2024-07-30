@@ -64,3 +64,11 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-or-update-project-card@v2
+        with:
+          project: "Autocode"
+          column: "To Do"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          content-id: ${{ steps.generate_code.outputs.pull-request }}
+          content-type: "pull-request"
+          labels: "autocoder-bot"
