@@ -42,10 +42,10 @@ runs:
     - name: Generate Code with ChatGPT
       id: generate_code
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPOSITORY: ${{ github.repository }}
-        ISSUE_NUMBER: ${{ github.event.issue.number }}
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        REPOSITORY: ${{ inputs.repository }}
+        ISSUE_NUMBER: ${{ inputs.issue.number }}
+        OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY }}
       run: ./scripts/script.sh $GITHUB_TOKEN $REPOSITORY $ISSUE_NUMBER $OPENAI_API_KEY
     
     - name: Upload Artifact
@@ -76,4 +76,4 @@ runs:
         labels: "autocoder-bot"
         author: autocoder-bot <actions@github.com>
         title: "#${{ github.event.issue.number }}"
-        branch: autocoder-branch-${{ github.event.issue.number }}
+        branch: autocoder-branch-${{ inputs.issue.number }}
