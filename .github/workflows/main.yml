@@ -19,7 +19,7 @@ jobs:
 
       - name: Generate Code with ChatGPT
         id: generate_code
-        uses: https://github.com/Karhal/AutoCoder@v1
+        uses: Karhal/AutoCoder@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
